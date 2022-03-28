@@ -87,9 +87,9 @@ while (j<len(listaViaturas)):
 
 def telegram_bot_sendtext(bot_message):
 	chatId = input("\nDigite o ChatID\n")
-	bot_token = "5171996246:AAGDSbjKrC1GTG75RrZ0jv4HaBQ7AVcj8j4"
-	#"r" Chat ID Sgt silvestre
-	#"1098462734" Chat ID Sd Nicollas
+	bot_token = ""
+	#"" Chat ID Sgt silvestre
+	#"" Chat ID Sd Nicollas
 	bot_chatID = chatId
 	send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 	response = requests.get(send_text)
