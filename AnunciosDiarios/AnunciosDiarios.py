@@ -64,22 +64,21 @@ with open('ListaViaturas.txt','r') as aV:
 #usar o while para criar as variaveis da lista
 #criar excessivasr variaveis
 
-i = 0
-while (i<len(listaEquipamentos)):
-	print(listaEquipamentos[i])
-	
-	i+=1
-	
 
-
+#while (i<len(listaEquipamentos)):
+#	print(listaEquipamentos[i])
+	
+#	i+=1
 	
 
 
 	
-j = 0
-while (j<len(listaViaturas)):
-	print(listaViaturas[j])
-	j+=1
+
+
+	
+#while (j<len(listaViaturas)):
+#	print(listaViaturas[j])
+#	j+=1
 	
 
 
@@ -161,44 +160,7 @@ def telegram_bot_sendtext(bot_message):
 #CHEFE SERVIÇO:
 #3º SGT SILVESTRE
 
-def funcaoEntrada(diaAtual,unidadeUEOP,alaDia,efetSubSgt,efetCbSd,chefeServico):
-	print("\nLista de equipamentos\n")
-	print("\nDigite a quantidade de cada equipamento presente na carga\n")
-	k = 0
-	while (k<len(listaEquipamentos)):
-		arrayEquipamentos[k]= str(input(listaEquipamentos[k]+": "))
-		k+=1
 
-	p = 0
-	#while (p<len(arrayEquipamentos)):
-		
-	
-	
-	
-
-	return
-
-
-def funcaoSaida(diaAtual,unidadeUEOP,alaDia):
-		ocorrenciasO= int(input("\n Ocorrencias O:"))
-		ocorrenciasS= int(input("\n Ocorrencias S:"))
-		ocorrenciasP= int(input("\n Ocorrencias P:"))
-		ocorrenciasV= int(input("\n Ocorrencias V:"))
-		ocorrenciasX= int(input("\n Ocorrencias X:"))
-		ocorrenciasY= int(input("\n Ocorrencias Y:"))
-		ocorrenciasQ= int(input("\n Ocorrencias Q:"))
-		ocorrenciasW= int(input("\n Ocorrencias W:"))
-		ocorrenciasR= int(input("\n Ocorrencias R;"))
-		casosCovid  = int(input("\n COVID:"))
-		observacoes = (input("\n OBSERVACOES:"))
-		iapr = ocorrenciasO+ocorrenciasS+ocorrenciasV
-		total = ocorrenciasO+ocorrenciasP+ocorrenciasQ+ocorrenciasQ+ocorrenciasR+ocorrenciasS+ocorrenciasV+ocorrenciasW+ocorrenciasX+ocorrenciasY
-		chefeServicoSaida = str(input("\n Chefe de Servico:"))
-		test = telegram_bot_sendtext("Bom dia senhores! \n"+str(alaDia)+"Ala -"+str(unidadeUEOP)+" atendeu \nem "+str(diaAtual)+"\n O = "+str(ocorrenciasO)+"\n S = "+str(ocorrenciasS)+"\n P = "+str(ocorrenciasP)+"\n V = "+str(ocorrenciasV)+"\n X = "+str(ocorrenciasX)+"\n Y = "+str(ocorrenciasY)+"\n Q = "+str(ocorrenciasQ)+"\n W = "+str(ocorrenciasW)+"\n R = "+str(ocorrenciasR)+"\n COVID : "+str(casosCovid)+"\n TOTAL : "+str(total)+"\n IAPR :"+str(iapr)+"\nOBS:"+str(observacoes)+"\n"+str(chefeServicoSaida)+" Chefe de Servico")
-	
-	
-
-		return
 
 def funcaoCovid():
 	
@@ -214,11 +176,11 @@ def tipoAnuncio(escolhaAnuncio):
 		return escolhaAnuncio
 	if escolhaAnuncio == 1:
 		print ("Voce escolheu anuncio de entrada!")
-		diaAtual = input("\n \n Digite o dia atual no formado dd/mm/aaaa \n")
+		diaAtual = input("\n \n Digite o dia atual no formato dd/mm/aaaa \n")
 		unidadeUEOP = input ("\n Digite a unidade/fracao no formao x Pel/y Cia/ Nome do Pelotao \n")
 		alaDia = input("\n Digite a Ala de servico '(Somente o numero da ala 1234)'\n")
 		#efetOficial = int(input("\n Digite a quanitade  de oficiais no Servico OPERACIONAL \n"))
-		efefetSubSgt = int(input("\n Digite a quanitade  de Sub/SGT no Servico OPERACIONAL \n"))
+		efetSubSgt = int(input("\n Digite a quanitade  de Sub/SGT no Servico OPERACIONAL \n"))
 		efetCbSd = int(input("\n Digite a quantidade  de Cb/Sd no Servico OPERACIONAL \n"))
 		chefeServico = input("\n Digite P/G e NOME DE GUERRA do Chefe de Servico \n")
 		funcaoEntrada(diaAtual,unidadeUEOP,alaDia,efetSubSgt,efetCbSd,chefeServico)
@@ -251,5 +213,47 @@ def main():
 		tipoAnuncio(escolhaAnuncio)
 		return False
 	return
+def funcaoEntrada(diaAtual,unidadeUEOP,alaDia,efetSubSgt,efetCbSd,chefeServico):
+    efetTotal = efetSubSgt+efetCbSd+efetOficial
+    print("\nLista de viaturas\n")
+    print("\nDigite somente ECD, Baixada ou Restricao - Motivo\n")
+    i=0
+    while (i<len(listaViaturas)):
+        arrayViaturas[i] = str(input(listaViaturas[i]+": "))
+        i+=1
+    
+    print("\nLista de equipamentos\n")
+    print("\nDigite a quantidade de cada equipamento presente na carga\n")
+    k = 0
+    
+    
+    while (k<len(listaEquipamentos)):
+        arrayEquipamentos[k]= str(input(listaEquipamentos[k]+": "))
+        k+=1
+    
+    obs = str(input("Observacoes: \n"))
+    #test = telegram_bot_sendtext("Bom dia Senhor\nSegue anúncio do dia "+str(diaAtual)+"\n"+str(unidadeUEOP)+"\n"+str(alaDia)+"ª Ala\n"+"EFETIVO\n"+str(efetSubSgt)+" Sub/Sgt \n"+str(efetCbSd)+" Cb/Sd\n"+"total: "+str(efetTotal)+"\n \n"+"VIATURAS: \n"+str(listaViaturas[0])str(+arrayViaturas[0])+"\n"str(+listaViaturas[1])+str(arrayViaturas[1])+"\n"+str(listaViaturas[2])+str(arrayViaturas[2])+"\n"+str(listaViaturas[3])+str(arrayViaturas[3])+"\n"+str(listaViaturas[4])+str(arrayViaturas[4])+"\n"+str(listaViaturas[5])+str(arrayViaturas[5])+"\n"+str(listaViaturas[6])+str(arrayViaturas[6])+"\n"+(listaViaturas[7])+str(arrayViaturas[7])+"\n"+str(listaViaturas[8])+str(arrayViaturas[8])+"\n"+"EQUIPAMENTOS: \n"+str(listaEquipamentos[0])+str(arrayEquipamentos[0])+"\n"+str(listaEquipamentos[1])+str(arrayEquipamentos[1])+"\n"+str(listaEquipamentos[2])+str(arrayEquipamentos[2])+"\n"+str(listaEquipamentos[3])+str(arrayEquipamentos[3])+"\n"+str(listaEquipamentos[4])+str(arrayEquipamentos[4])+"\n"+str(listaEquipamentos[5])+str(arrayEquipamentos[5])+"\n"+str(listaEquipamentos[6])+str(arrayEquipamentos[6])+"\n CHEFE SERVIÇO: \n"+chefeServico)
+    return
 
+
+def funcaoSaida(diaAtual,unidadeUEOP,alaDia):
+		ocorrenciasO= int(input("\n Ocorrencias O:"))
+		ocorrenciasS= int(input("\n Ocorrencias S:"))
+		ocorrenciasP= int(input("\n Ocorrencias P:"))
+		ocorrenciasV= int(input("\n Ocorrencias V:"))
+		ocorrenciasX= int(input("\n Ocorrencias X:"))
+		ocorrenciasY= int(input("\n Ocorrencias Y:"))
+		ocorrenciasQ= int(input("\n Ocorrencias Q:"))
+		ocorrenciasW= int(input("\n Ocorrencias W:"))
+		ocorrenciasR= int(input("\n Ocorrencias R;"))
+		casosCovid  = int(input("\n COVID:"))
+		observacoes = (input("\n OBSERVACOES:"))
+		iapr = ocorrenciasO+ocorrenciasS+ocorrenciasV
+		total = ocorrenciasO+ocorrenciasP+ocorrenciasQ+ocorrenciasQ+ocorrenciasR+ocorrenciasS+ocorrenciasV+ocorrenciasW+ocorrenciasX+ocorrenciasY
+		chefeServicoSaida = str(input("\n Chefe de Servico:"))
+		test = telegram_bot_sendtext("Bom dia senhores! \n"+str(alaDia)+"Ala -"+str(unidadeUEOP)+" atendeu \nem "+str(diaAtual)+"\n O = "+str(ocorrenciasO)+"\n S = "+str(ocorrenciasS)+"\n P = "+str(ocorrenciasP)+"\n V = "+str(ocorrenciasV)+"\n X = "+str(ocorrenciasX)+"\n Y = "+str(ocorrenciasY)+"\n Q = "+str(ocorrenciasQ)+"\n W = "+str(ocorrenciasW)+"\n R = "+str(ocorrenciasR)+"\n COVID : "+str(casosCovid)+"\n TOTAL : "+str(total)+"\n IAPR :"+str(iapr)+"\nOBS:"+str(observacoes)+"\n"+str(chefeServicoSaida)+" Chefe de Servico")
+	
+	
+
+		return
 main()
