@@ -86,9 +86,9 @@ with open('ListaViaturas.txt','r') as aV:
 
 def telegram_bot_sendtext(bot_message):
 	chatId = input("\nDigite o ChatID\n")
-	bot_token = ""
-	#"" Chat ID Sgt silvestre
-	#"" Chat ID Sd Nicollas
+	bot_token = "5171996246:AAGDSbjKrC1GTG75RrZ0jv4HaBQ7AVcj8j4"
+	#"1700341008" Chat ID Sgt silvestre
+	#"1098462734" Chat ID Sd Nicollas
 	bot_chatID = chatId
 	send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 	response = requests.get(send_text)
@@ -219,20 +219,28 @@ def funcaoEntrada(diaAtual,unidadeUEOP,alaDia,efetSubSgt,efetCbSd,chefeServico):
     print("\nDigite somente ECD, Baixada ou Restricao - Motivo\n")
     i=0
     while (i<len(listaViaturas)):
-        arrayViaturas[i] = str(input(listaViaturas[i]+": "))
+        arrayViaturas[i] = ": "+str(input(listaViaturas[i]+": "))+"\n"
         i+=1
-    
+    i=0
     print("\nLista de equipamentos\n")
     print("\nDigite a quantidade de cada equipamento presente na carga\n")
     k = 0
     
     
     while (k<len(listaEquipamentos)):
-        arrayEquipamentos[k]= str(input(listaEquipamentos[k]+": "))
+        arrayEquipamentos[k]= ": "+str(input(listaEquipamentos[k]+": "))+"\n"
         k+=1
-    
+
+
+
+    listaFullViaturas = [i+j for i,j in zip(listaViaturas,arrayViaturas)]
+    listaFullEquipamentos = [i+j for i,j in zip(listaEquipamentos,arrayEquipamentos)]
+    stringFullviaturas = ''.join([str(item) for item in listaFullViaturas])
+    stringFullEquipamentos = ''.join([str(item) for item in listaFullEquipamentos])
+
+
     obs = str(input("Observacoes: \n"))
-    #test = telegram_bot_sendtext("Bom dia Senhor\nSegue anúncio do dia "+str(diaAtual)+"\n"+str(unidadeUEOP)+"\n"+str(alaDia)+"ª Ala\n"+"EFETIVO\n"+str(efetSubSgt)+" Sub/Sgt \n"+str(efetCbSd)+" Cb/Sd\n"+"total: "+str(efetTotal)+"\n \n"+"VIATURAS: \n"+str(listaViaturas[0])str(+arrayViaturas[0])+"\n"str(+listaViaturas[1])+str(arrayViaturas[1])+"\n"+str(listaViaturas[2])+str(arrayViaturas[2])+"\n"+str(listaViaturas[3])+str(arrayViaturas[3])+"\n"+str(listaViaturas[4])+str(arrayViaturas[4])+"\n"+str(listaViaturas[5])+str(arrayViaturas[5])+"\n"+str(listaViaturas[6])+str(arrayViaturas[6])+"\n"+(listaViaturas[7])+str(arrayViaturas[7])+"\n"+str(listaViaturas[8])+str(arrayViaturas[8])+"\n"+"EQUIPAMENTOS: \n"+str(listaEquipamentos[0])+str(arrayEquipamentos[0])+"\n"+str(listaEquipamentos[1])+str(arrayEquipamentos[1])+"\n"+str(listaEquipamentos[2])+str(arrayEquipamentos[2])+"\n"+str(listaEquipamentos[3])+str(arrayEquipamentos[3])+"\n"+str(listaEquipamentos[4])+str(arrayEquipamentos[4])+"\n"+str(listaEquipamentos[5])+str(arrayEquipamentos[5])+"\n"+str(listaEquipamentos[6])+str(arrayEquipamentos[6])+"\n CHEFE SERVIÇO: \n"+chefeServico)
+    test = telegram_bot_sendtext("Bom dia Senhor\nSegue anúncio do dia "+str(diaAtual)+"\n"+str(unidadeUEOP)+"\n"+str(alaDia)+"ª Ala\n"+"EFETIVO\n"+str(efetSubSgt)+" Sub/Sgt \n"+str(efetCbSd)+" Cb/Sd\n"+"total: "+str(efetTotal)+"\n \n"+"VIATURAS: \n"+str(stringFullviaturas)+"\n"+"EQUIPAMENTOS: \n"+str(stringFullEquipamentos)+"\n CHEFE SERVIÇO: \n"+chefeServico)
     return
 
 
