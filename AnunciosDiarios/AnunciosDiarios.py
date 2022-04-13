@@ -6,7 +6,7 @@ import sys
 import time
 import os
 from os import listdir
-from tkinter import *
+import tkinter as tk
 import requests
 import flask
 
@@ -81,14 +81,17 @@ with open('ListaViaturas.txt','r') as aV:
 #	j+=1
 	
 
+#"1700341008" Chat ID Sgt silvestre
+#"1098462734" Chat ID Sd Nicollas
+chatIDSilvestre = 1700341008
+chatIDNicollas =  1098462734
 
 
 
 def telegram_bot_sendtext(bot_message):
 	chatId = input("\nDigite o ChatID\n")
 	bot_token = "5171996246:AAGDSbjKrC1GTG75RrZ0jv4HaBQ7AVcj8j4"
-	#"1700341008" Chat ID Sgt silvestre
-	#"1098462734" Chat ID Sd Nicollas
+
 	bot_chatID = chatId
 	send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
 	response = requests.get(send_text)
@@ -200,19 +203,22 @@ def tipoAnuncio(escolhaAnuncio):
 	return
 
 def main():
-	time.sleep(2)
-	last = {
-		"userChoice" : 0,
-		"timesError" : 0,
-	}
+    time.sleep(2)
+    last = {
+        "userChoice" : 0,
+        "timesError" : 0,
+    }
 
-	escolhaAnuncio = int(input("\n Escolha o tipo de Anuncio, DIGITAR SOMENTE NUMEROS \n"))
 
-	
-	while escolhaAnuncio != -1:
-		tipoAnuncio(escolhaAnuncio)
-		return False
-	return
+
+    escolhaAnuncio = int(input("\n Escolha o tipo de Anuncio, DIGITAR SOMENTE NUMEROS \n"))
+
+
+    
+    while escolhaAnuncio != -1:
+        tipoAnuncio(escolhaAnuncio)
+        return False
+    return
 def funcaoEntrada(diaAtual,unidadeUEOP,alaDia,efetSubSgt,efetCbSd,chefeServico):
     efetTotal = efetSubSgt+efetCbSd+efetOficial
     print("\nLista de viaturas\n")
@@ -240,28 +246,43 @@ def funcaoEntrada(diaAtual,unidadeUEOP,alaDia,efetSubSgt,efetCbSd,chefeServico):
 
 
     obs = str(input("Observacoes: \n"))
-    test = telegram_bot_sendtext("Bom dia Senhor\nSegue anúncio do dia "+str(diaAtual)+"\n"+str(unidadeUEOP)+"\n"+str(alaDia)+"ª Ala\n"+"EFETIVO\n"+str(efetSubSgt)+" Sub/Sgt \n"+str(efetCbSd)+" Cb/Sd\n"+"total: "+str(efetTotal)+"\n \n"+"VIATURAS: \n"+str(stringFullviaturas)+"\n"+"EQUIPAMENTOS: \n"+str(stringFullEquipamentos)+"\n CHEFE SERVIÇO: \n"+chefeServico)
+    confirmaAnuncio = str(input("\n \n \nCONFIRME O TEXTO ABAIXO \n \n \n"+"Bom dia Senhor\nSegue anúncio do dia "+str(diaAtual)+"\n"+str(unidadeUEOP)+"\n"+str(alaDia)+"ª Ala\n"+"EFETIVO\n"+str(efetSubSgt)+" Sub/Sgt \n"+str(efetCbSd)+" Cb/Sd\n"+"total: "+str(efetTotal)+"\n \n"+"VIATURAS: \n"+str(stringFullviaturas)+"\n"+"EQUIPAMENTOS: \n"+str(stringFullEquipamentos)+"\n CHEFE SERVIÇO: \n"+chefeServico+"\n \n `S` PARA CONFIRMAR `N` PARA REFAZER \n"))
+    if confirmaAnuncio == "S":
+        test = telegram_bot_sendtext("Bom dia Senhor\nSegue anúncio do dia "+str(diaAtual)+"\n"+str(unidadeUEOP)+"\n"+str(alaDia)+"ª Ala\n"+"EFETIVO\n"+str(efetSubSgt)+" Sub/Sgt \n"+str(efetCbSd)+" Cb/Sd\n"+"total: "+str(efetTotal)+"\n \n"+"VIATURAS: \n"+str(stringFullviaturas)+"\n"+"EQUIPAMENTOS: \n"+str(stringFullEquipamentos)+"\n CHEFE SERVIÇO: \n"+chefeServico)
+        return
+    else:
+        funcaoEntrada(diaAtual,unidadeUEOP,alaDia,efetSubSgt,efetCbSd,chefeServico)
+        return        
+    
     return
 
 
 def funcaoSaida(diaAtual,unidadeUEOP,alaDia):
-		ocorrenciasO= int(input("\n Ocorrencias O:"))
-		ocorrenciasS= int(input("\n Ocorrencias S:"))
-		ocorrenciasP= int(input("\n Ocorrencias P:"))
-		ocorrenciasV= int(input("\n Ocorrencias V:"))
-		ocorrenciasX= int(input("\n Ocorrencias X:"))
-		ocorrenciasY= int(input("\n Ocorrencias Y:"))
-		ocorrenciasQ= int(input("\n Ocorrencias Q:"))
-		ocorrenciasW= int(input("\n Ocorrencias W:"))
-		ocorrenciasR= int(input("\n Ocorrencias R;"))
-		casosCovid  = int(input("\n COVID:"))
-		observacoes = (input("\n OBSERVACOES:"))
-		iapr = ocorrenciasO+ocorrenciasS+ocorrenciasV
-		total = ocorrenciasO+ocorrenciasP+ocorrenciasQ+ocorrenciasQ+ocorrenciasR+ocorrenciasS+ocorrenciasV+ocorrenciasW+ocorrenciasX+ocorrenciasY
-		chefeServicoSaida = str(input("\n Chefe de Servico:"))
-		test = telegram_bot_sendtext("Bom dia senhores! \n"+str(alaDia)+"Ala -"+str(unidadeUEOP)+" atendeu \nem "+str(diaAtual)+"\n O = "+str(ocorrenciasO)+"\n S = "+str(ocorrenciasS)+"\n P = "+str(ocorrenciasP)+"\n V = "+str(ocorrenciasV)+"\n X = "+str(ocorrenciasX)+"\n Y = "+str(ocorrenciasY)+"\n Q = "+str(ocorrenciasQ)+"\n W = "+str(ocorrenciasW)+"\n R = "+str(ocorrenciasR)+"\n COVID : "+str(casosCovid)+"\n TOTAL : "+str(total)+"\n IAPR :"+str(iapr)+"\nOBS:"+str(observacoes)+"\n"+str(chefeServicoSaida)+" Chefe de Servico")
-	
-	
+    ocorrenciasO= int(input("\n Ocorrencias O:"))
+    ocorrenciasS= int(input("\n Ocorrencias S:"))
+    ocorrenciasP= int(input("\n Ocorrencias P:"))
+    ocorrenciasV= int(input("\n Ocorrencias V:"))
+    ocorrenciasX= int(input("\n Ocorrencias X:"))
+    ocorrenciasY= int(input("\n Ocorrencias Y:"))
+    ocorrenciasQ= int(input("\n Ocorrencias Q:"))
+    ocorrenciasW= int(input("\n Ocorrencias W:"))
+    ocorrenciasR= int(input("\n Ocorrencias R;"))
+    casosCovid  = int(input("\n COVID:"))
+    observacoes = (input("\n OBSERVACOES:"))
+    iapr = ocorrenciasO+ocorrenciasS+ocorrenciasV
+    total = ocorrenciasO+ocorrenciasP+ocorrenciasQ+ocorrenciasQ+ocorrenciasR+ocorrenciasS+ocorrenciasV+ocorrenciasW+ocorrenciasX+ocorrenciasY
+    chefeServicoSaida = str(input("\n Chefe de Servico:"))
+    confirmaAnuncio = str(input("\n \n \nCONFIRME O TEXTO ABAIXO \n \n \n"+"Bom dia senhores! \n"+str(alaDia)+"Ala -"+str(unidadeUEOP)+" atendeu \nem "+str(diaAtual)+"\n O = "+str(ocorrenciasO)+"\n S = "+str(ocorrenciasS)+"\n P = "+str(ocorrenciasP)+"\n V = "+str(ocorrenciasV)+"\n X = "+str(ocorrenciasX)+"\n Y = "+str(ocorrenciasY)+"\n Q = "+str(ocorrenciasQ)+"\n W = "+str(ocorrenciasW)+"\n R = "+str(ocorrenciasR)+"\n COVID : "+str(casosCovid)+"\n TOTAL : "+str(total)+"\n IAPR :"+str(iapr)+"\nOBS:"+str(observacoes)+"\n"+str(chefeServicoSaida)+" Chefe de Servico"+"\n \n `S` PARA CONFIRMAR `N` PARA REFAZER \n"))
+    
+    if confirmaAnuncio == "S":
+        test = telegram_bot_sendtext("Bom dia senhores! \n"+str(alaDia)+"Ala -"+str(unidadeUEOP)+" atendeu \nem "+str(diaAtual)+"\n O = "+str(ocorrenciasO)+"\n S = "+str(ocorrenciasS)+"\n P = "+str(ocorrenciasP)+"\n V = "+str(ocorrenciasV)+"\n X = "+str(ocorrenciasX)+"\n Y = "+str(ocorrenciasY)+"\n Q = "+str(ocorrenciasQ)+"\n W = "+str(ocorrenciasW)+"\n R = "+str(ocorrenciasR)+"\n COVID : "+str(casosCovid)+"\n TOTAL : "+str(total)+"\n IAPR :"+str(iapr)+"\nOBS:"+str(observacoes)+"\n"+str(chefeServicoSaida)+" Chefe de Servico")
+        return
+    else:
+        return
 
-		return
+    return
+
+
+
+
 main()
