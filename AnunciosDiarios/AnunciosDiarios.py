@@ -7,7 +7,6 @@ import time
 import os
 from os import listdir
 import tkinter as tk
-import requests
 import flask
 
 #print("Insira ChatID")
@@ -52,33 +51,10 @@ with open('ListaViaturas.txt','r') as aV:
 #USANDO LINE.STRIP AS PAGINAS ESTAO LENDO CADA LINHA COM O ESPACO, AGORA LEMBRAR DE ATRIBUIR CADA POSICAO UMA VARIAVEL
 #ATRIBUIR CADA VIATURA UMA VARIAVEL E TRABALHOSO E DEXA O CODIGO NAO ATUALIZAVEL
 
-#viaturasStringList = [l[0] for l in list(viaturasArray)]
-#onde a posicao [0] e a primeira viatura da lista
-#equipamentosStringList = [j[0] for j in list(equipamentosArray)]
-#k=0
-#i=0
-#print(viaturasStringList)
-#print(viaturasArray)
-#string = " ".join([l[0] for l in list(viaturasArray)])
-
 #usar o while para criar as variaveis da lista
-#criar excessivasr variaveis
+#cria excessivas variaveis
 
 
-#while (i<len(listaEquipamentos)):
-#	print(listaEquipamentos[i])
-	
-#	i+=1
-	
-
-
-	
-
-
-	
-#while (j<len(listaViaturas)):
-#	print(listaViaturas[j])
-#	j+=1
 	
 
 #"1700341008" Chat ID Sgt silvestre
@@ -90,7 +66,7 @@ chatIDNicollas =  1098462734
 
 def telegram_bot_sendtext(bot_message):
 	chatId = input("\nDigite o ChatID\n")
-	bot_token = "5171996246:AAGDSbjKrC1GTG75RrZ0jv4HaBQ7AVcj8j4"
+	bot_token = "##"
 
 	bot_chatID = chatId
 	send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
@@ -99,69 +75,6 @@ def telegram_bot_sendtext(bot_message):
 
 #test = telegram_bot_sendtext("🔌 Teste do Bot 3ala Caratinga!!!")
 
-#Bom dia senhores!
-#3Ala-2° Pel Caratinga atendeu
-#Em 01/02/2022:
-
-#O = 01
-#S = 00
-#P = 01
-#V = 02
-#X = 00
-#Y = 03
-#Q = 01
-#W = 00
-#R = 00
-#COVID : 00
-#TOTAL : 08
-#IAPR : 03
-
-#O.S. 242: 
-#2022- 004908724-001
-#2022-004928320-001
-#2022-004928922-001
-
-#SGT SILVESTRE – CH. SERVIÇO
-
-
-
-
-#Bom dia Senhor, 
-#Segue anúncio do dia 05/02/2022
-
-#2° Pel / 2° Cia - Caratinga 
-#3ª Ala
-#EFETIVO 
-#03 Sub / Sgt
-#02 Cb/Sd
-#total: 05
-
-#VIATURAS:
-#UR 11199  ECD
-#TPO 0625 ECD   
-#APF 1371 GPV ECD
-#ABS 1126 ECD
-
-#ABT 0475 BAIXADA
-#ASL 0518 11BBM
-
-
-#EQUIPAMENTOS:
-
-#LGE 8
-#Motor de popa 01
-#Gerador 00
-#Motosserra 01
-#Equipamento de iluminação 00
-#EPR 03+01
-#Desencarcerador: 01 
-
-#OBS.:
-
-
-
-#CHEFE SERVIÇO:
-#3º SGT SILVESTRE
 
 
 
@@ -272,12 +185,13 @@ def funcaoSaida(diaAtual,unidadeUEOP,alaDia):
     iapr = ocorrenciasO+ocorrenciasS+ocorrenciasV
     total = ocorrenciasO+ocorrenciasP+ocorrenciasQ+ocorrenciasQ+ocorrenciasR+ocorrenciasS+ocorrenciasV+ocorrenciasW+ocorrenciasX+ocorrenciasY
     chefeServicoSaida = str(input("\n Chefe de Servico:"))
-    confirmaAnuncio = str(input("\n \n \nCONFIRME O TEXTO ABAIXO \n \n \n"+"Bom dia senhores! \n"+str(alaDia)+"Ala -"+str(unidadeUEOP)+" atendeu \nem "+str(diaAtual)+"\n O = "+str(ocorrenciasO)+"\n S = "+str(ocorrenciasS)+"\n P = "+str(ocorrenciasP)+"\n V = "+str(ocorrenciasV)+"\n X = "+str(ocorrenciasX)+"\n Y = "+str(ocorrenciasY)+"\n Q = "+str(ocorrenciasQ)+"\n W = "+str(ocorrenciasW)+"\n R = "+str(ocorrenciasR)+"\n COVID : "+str(casosCovid)+"\n TOTAL : "+str(total)+"\n IAPR :"+str(iapr)+"\nOBS:"+str(observacoes)+"\n"+str(chefeServicoSaida)+" Chefe de Servico"+"\n \n `S` PARA CONFIRMAR `N` PARA REFAZER \n"))
-    
+    confirmaAnuncio = str(input("\n \n \nCONFIRME O TEXTO ABAIXO \n \n \n"+"Bom dia senhores! \n {0}Ala - {1} atendeu \nem {2}\n O = {3}\n S = {4}\n P = {5}\n V = {6}\n X = {7}\n Y = {8}\n Q = {9}\n W = {10}\n R = {11}\nCOVID : {12}\nTOTAL : {13}\n IAPR :{14}\nOBS:{15}\n{16} Chefe de Servico"+"\n \n `S` PARA CONFIRMAR `N` PARA REFAZER \n").format())
+    ##TODO Atualizar os indicadores no final do input confirmaAnuncio....
     if confirmaAnuncio == "S":
         test = telegram_bot_sendtext("Bom dia senhores! \n"+str(alaDia)+"Ala -"+str(unidadeUEOP)+" atendeu \nem "+str(diaAtual)+"\n O = "+str(ocorrenciasO)+"\n S = "+str(ocorrenciasS)+"\n P = "+str(ocorrenciasP)+"\n V = "+str(ocorrenciasV)+"\n X = "+str(ocorrenciasX)+"\n Y = "+str(ocorrenciasY)+"\n Q = "+str(ocorrenciasQ)+"\n W = "+str(ocorrenciasW)+"\n R = "+str(ocorrenciasR)+"\n COVID : "+str(casosCovid)+"\n TOTAL : "+str(total)+"\n IAPR :"+str(iapr)+"\nOBS:"+str(observacoes)+"\n"+str(chefeServicoSaida)+" Chefe de Servico")
         return
     else:
+	
         return
 
     return
